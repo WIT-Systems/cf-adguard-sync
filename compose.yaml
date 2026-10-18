@@ -1,0 +1,27 @@
+services:
+  dnsmasq:
+    image: jpillora/dnsmasq
+    container_name: local-dnsmasq
+    restart: unless-stopped
+    volumes:
+      - cfads_dns_data:/data
+    ports:
+      - "5353:53/udp"
+    command: --addn-hosts=/data/custom.hosts --conf-file=/data/wildcards.conf --log-queries
+
+  cf-dns-sync:
+    image: ghcr.io/wit-systems/cf-adguard-sync:latest
+    build: .
+    container_name: cf-dns-sync
+    restart: unless-stopped
+    volumes:
+      - cfads_dns_data:/data
+    environment:
+      - CF_TOKEN=CFtokenhere
+      - CF_ZONES=example.com
+      - HOSTS_FILE=/data/custom.hosts
+      
+      - SYNC_INTERVAL=30
+
+volumes:
+  cfads_dns_data:
