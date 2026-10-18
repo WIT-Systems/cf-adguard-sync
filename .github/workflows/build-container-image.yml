@@ -7,7 +7,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: WIT-Systems/cd-adguard-sync
+  IMAGE_NAME: WIT-Systems/cf-adguard-sync
 
 jobs:
   build-and-push:

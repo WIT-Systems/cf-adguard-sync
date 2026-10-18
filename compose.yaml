@@ -7,7 +7,7 @@ services:
       - cfads_dns_data:/data
     ports:
       - "5353:53/udp"
-    command: --addn-hosts=/data/custom.hosts --conf-file=/data/wildcards.conf --log-queries
+    command: --addn-hosts=/data/custom.hosts --conf-file=/data/wildcards.conf
 
   cf-dns-sync:
     image: ghcr.io/wit-systems/cf-adguard-sync:latest
